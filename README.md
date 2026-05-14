@@ -22,6 +22,10 @@ When the random timer triggers, the script utilizes the `stress` tool to max out
 | **Load Average (1 min)** | < 0.50 | Rapidly spikes above 4.00 |
 | **Top Active Processes** | Background services (`httpd`, `htop`) | `stress` hogs dominate the top list |
 | **System Behavior** | Responsive and fast | Potential minor delays depending on instance type |
+### 4. AWS CloudWatch Visualization
+This graph demonstrates the CPU utilization captured by AWS CloudWatch. You can clearly observe the sudden spike caused by our `stress` script, proving that the cloud monitoring tools successfully detect the simulated load. This is a critical step for triggering Auto Scaling policies.
+
+![AWS CloudWatch CPU Spike](AWSCloudWatchCPU)
 
 ## Prerequisites
 Ensure the `stress` package is installed:
