@@ -1,16 +1,16 @@
-A lightweight bash script designed to simulate random CPU spikes. This tool is highly effective for testing AWS EC2 Auto Scaling groups and validating CloudWatch alarms within automated CI/CD pipelines (DCO) to ensure efficient cloud resource optimization.
+# Random CPU Spike Simulator
+
+A simple bash script to simulate random CPU spikes. Useful for testing AWS EC2 Auto Scaling groups and validating CloudWatch alarms within automated CI/CD pipelines (DCO).
 
 ## Resource Monitoring & Comparison
 
-This section compares the server's state during normal operation versus when the stress script is active.
-
 ### 1. Server Idle State (Normal)
-During the `sleep` phase of the script, the server resources remain stable, allowing normal services to run without interruption.
+During the `sleep` phase of the script, server resources remain stable, allowing normal services to run without interruption.
 
 ![htop Server Monitor - Idle State](normalstress.png)
 
 ### 2. Server Stress State (Active Spikes)
-When the random timer triggers, the script utilizes the `stress` tool to max out the CPU cores for 5 seconds. This is what it looks like:
+When the random timer triggers, the script uses the `stress` tool to max out CPU cores for 5 seconds. htop output during the stress test:
 
 ![htop Server Monitor - Stress State](cpu-high-active.png)
 
@@ -22,17 +22,18 @@ When the random timer triggers, the script utilizes the `stress` tool to max out
 | **Load Average (1 min)** | < 0.50 | Rapidly spikes above 4.00 |
 | **Top Active Processes** | Background services (`httpd`, `htop`) | `stress` hogs dominate the top list |
 | **System Behavior** | Responsive and fast | Potential minor delays depending on instance type |
+
 ### 4. AWS CloudWatch Visualization
-This graph demonstrates the CPU utilization captured by AWS CloudWatch. You can clearly observe the sudden spike caused by our `stress` script, proving that the cloud monitoring tools successfully detect the simulated load. This is a critical step for triggering Auto Scaling policies.
+CloudWatch metrics showing the simulated load and the sudden CPU utilization spike. This detection is critical for triggering Auto Scaling policies.
 
 ![AWS CloudWatch CPU Spike](AWSCloudWatchCPU.png)
-5. CloudWatch Alarm Triggering (Auto Scaling Event)
 
-The primary goal of this stress test is to validate our alerting system. When the CPU utilization crosses the predefined threshold (e.g., > 60%), the CloudWatch Alarm state transitions from `OK` to `ALARM`. 
+### 5. CloudWatch Alarm Triggering (Auto Scaling Event)
+The primary goal of this stress test is to validate the alerting system. When CPU utilization crosses the predefined threshold (e.g., > 60%), the CloudWatch Alarm state transitions from `OK` to `ALARM`. 
 
-This state change acts as the trigger for our **AWS Auto Scaling Group policies**, initiating a scale-out event to automatically launch new EC2 instances and handle the simulated load effectively.
+This state change triggers the **AWS Auto Scaling Group**, initiating a scale-out event to automatically launch new EC2 instances.
 
-*(Note: You can add an image here showing the Alarm in "In alarm" state in the AWS Console if you have one using `![CloudWatch Alarm State](alarm.png)
+![CloudWatch Alarm State](alarm.png)
 
 ## Prerequisites
 Ensure the `stress` package is installed:
@@ -41,6 +42,6 @@ Ensure the `stress` package is installed:
 
 ## Execution Guide
 
-**1. Foreground Execution (For direct observation):**
+**Foreground Execution (For direct observation):**
 ```bash
 ./random_stress.sh
