@@ -7,12 +7,12 @@ This section compares the server's state during normal operation versus when the
 ### 1. Server Idle State (Normal)
 During the `sleep` phase of the script, the server resources remain stable, allowing normal services to run without interruption.
 
-![htop Server Monitor - Idle State](image_afc33f.jpg)
+![htop Server Monitor - Idle State](normalstress.png)
 
 ### 2. Server Stress State (Active Spikes)
 When the random timer triggers, the script utilizes the `stress` tool to max out the CPU cores for 5 seconds. This is what it looks like:
 
-![htop Server Monitor - Stress State](image_afb43b.jpg)
+![htop Server Monitor - Stress State](cpu-high-active.png)
 
 ### 3. Idle vs. Stress State Comparison
 
