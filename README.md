@@ -25,7 +25,7 @@ When the random timer triggers, the script utilizes the `stress` tool to max out
 ### 4. AWS CloudWatch Visualization
 This graph demonstrates the CPU utilization captured by AWS CloudWatch. You can clearly observe the sudden spike caused by our `stress` script, proving that the cloud monitoring tools successfully detect the simulated load. This is a critical step for triggering Auto Scaling policies.
 
-![AWS CloudWatch CPU Spike](AWSCloudWatchCPU)
+![AWS CloudWatch CPU Spike](AWSCloudWatchCPU.png)
 
 ## Prerequisites
 Ensure the `stress` package is installed:
